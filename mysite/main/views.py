@@ -6,20 +6,20 @@ from .forms import TaskForm
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 
-
 @login_required(login_url="/login/")
 def create(request):
+    print(request.POST)
     if request.method=="POST":
+
         form = TaskForm(request.POST)
         if form.is_valid():
-
             t = form.cleaned_data['task']
             c = form.cleaned_data['complete']
             x = Item(user=request.user, task=t, complete=c)
             x.save()
             return redirect("/home/")
     else:
-        form = TaskForm()
+            form = TaskForm()
 
     return render(request, "create.html",{'form':form} )
 
@@ -81,3 +81,5 @@ class  task_delete(DeleteView):
     model = Item
     template_name="confirm_delete.html"
     success_url = reverse_lazy("home")
+
+

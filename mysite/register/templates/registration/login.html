@@ -9,11 +9,22 @@ Login Here
 
 
 {% block content %}
-<form action=" "method="POST">
+<div class="ml-lg-5 container ">
+    <form action=" "method="POST" >
     {% csrf_token %}
     {{form|crispy}}
     <p class="p-2 m-3"> Don't have an account ? Create one <a href="{%url 'register' %}">here</a></p>
-    <button type="submit " class="btn btn-success">Login</button>
-
+    <div style="padding:20px 80px 20px 150px ;">
+    <button type="submit" style="border: 1px solid black;" class="btn btn-success ml-4 " class="btn btn-success">Login</button>
+    </div>
 </form>
+</div>
+     <div class="pt-2 mt-2 container text-justify text-center m-auto">
+    <p><strong class="">-- OR --</strong></p>
+      <ul class="row">
+        <a class="col-lg-4 col-md-3" href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+      <a class="col-lg-4 col-md-3" href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>
+      <a class="col-lg-4 col-md-3" href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+      </ul>
+    </div>
 {% endblock %}

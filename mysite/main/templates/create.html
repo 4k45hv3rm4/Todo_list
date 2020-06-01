@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content  %}
-<div class="container col-lg-10 mt-4 p-3 " style="text-align: center">
+<div class="container col-lg-10  p-1 " style="text-align: center">
  <h1>Add new task to your Todo List</h1>
-<form method="POST" action="/create/" class="form-group">
+<form method="POST" action="" class="form-group">
     {% csrf_token %}
-    <div class="input-group m-5 p-2">
-        <div class="input-group-prepend">
-            <button type="submit" name="save" value="add task"
-            class="btn btn-success">Add Task</button>
-        </div>
         {{ form.task}}
-    </div>
+
+        <!-- <input type="time" value="" > -->
+    <button type="submit" name="save" value="add task"class="btn btn-success  ">Add Task</button>
+
+
 </form>
 </div>
 {% endblock %}

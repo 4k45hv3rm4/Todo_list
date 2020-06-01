@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'main',
     'register',
-    'crispy_forms'
+    'crispy_forms',
+    'social_django'
 ]
 
 
@@ -52,6 +53,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -67,10 +71,21 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',  # <--
+                'social_django.context_processors.login_redirect', #<---
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -127,3 +142,11 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK="bootstrap4"
 LOGIN_REDIRECT_URL = "/home/"
 LOGOUT_REDIRECT_URL = "/login/"
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+SOCIAL_AUTH_GITHUB_KEY = '85ee88d97c25ad89b632'
+SOCIAL_AUTH_GITHUB_SECRET='7e0f7a8aab84a9ce24ee3bb3145b1095987dfe71'
+SOCIAL_AUTH_TWITTER_KEY='klAf5giy338YM6zPeAPLB75XM'
+SOCIAL_AUTH_TWITTER_SECRET ='uRgbu8uffZvvqZYAJbBU90jPAncj7NJj7h4r26pP7oUD7NhUKa'
+SOCIAL_AUTH_FACEBOOK_KEY='246066263326588'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '61b40e8903c206ee7eea8971ff522411'  # App Secret
